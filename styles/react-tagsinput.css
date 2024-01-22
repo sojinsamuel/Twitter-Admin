@@ -1,0 +1,63 @@
+/* Styling for React TagsInput */
+.react-tagsinput {
+  display: inline-block;
+  background-color: #f9f9f9;
+  border: 2px solid #4caf50;
+  border-radius: 5px;
+  padding: 5px; /* Adjusted padding */
+  transition: border-color 0.3s ease-in-out;
+  height: fit-content;
+  margin-bottom: 1em;
+}
+
+.react-tagsinput--focused {
+  border-color: #2196f3;
+}
+
+.react-tagsinput-tag {
+  background-color: #4caf50;
+  border-radius: 3px;
+  border: 1px solid #388e3c;
+  color: #ffffff;
+  display: inline-block;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 0px; /* Adjusted margin */
+  margin-right: 8px;
+  padding: 8px;
+  transition: background-color 0.3s ease-in-out;
+  /* height: 5px; */
+}
+
+.react-tagsinput-tag:hover {
+  background-color: #45a049;
+}
+
+.react-tagsinput-remove {
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.react-tagsinput-tag a::before {
+  content: " ×";
+}
+
+.react-tagsinput-input {
+  background: transparent;
+  border: 0;
+  color: #333;
+  font-family: "Arial", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  /* margin-bottom: 6px; Adjusted margin */
+  margin-top: 2px;
+  outline: none;
+  padding: 8px;
+  width: 120px; /* Adjusted width */
+  transition: border-color 0.3s ease-in-out;
+}
+
+.react-tagsinput-input:focus {
+  border-color: #2196f3;
+}
