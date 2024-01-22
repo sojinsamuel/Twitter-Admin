@@ -141,7 +141,7 @@ export const columns: ColumnDef<Account>[] = [
                 </div> */}
                 <div className="grid grid-cols-4 items-center gap-4">
                   <Label htmlFor="username" className="text-right">
-                    Username
+                    keyword
                   </Label>
                   <Input
                     id="username"
