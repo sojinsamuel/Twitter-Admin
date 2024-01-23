@@ -52,8 +52,8 @@ async function createRecord(tableName: string, newToken: any) {
     TableName: tableName,
     Item: {
       ...newToken,
-      active: false,
-      activity: "Sleep",
+      active: true,
+      activity: "Alive",
       replyTargets: [],
       ranOnce: false,
       keyword: "",

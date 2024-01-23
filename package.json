@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --experimental-https",
     "build": "next build ",
     "start": "next start",
     "lint": "next lint "
   },
   "dependencies": {
+    "@aws-sdk/client-cloudwatch-events": "^3.496.0",
     "@aws-sdk/client-dynamodb": "^3.490.0",
     "@aws-sdk/lib-dynamodb": "^3.490.0",
     "@radix-ui/react-dialog": "^1.0.5",

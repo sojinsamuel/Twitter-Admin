@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import TagsInput from "react-tagsinput";
 import "@/styles/react-tagsinput.css";
+import { unstable_noStore as noStore } from "next/cache";
 
 import {
   ColumnDef,
@@ -47,6 +48,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
 }: DataTableProps<TData, TValue>) {
+  noStore();
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
@@ -67,20 +69,20 @@ export function DataTable<TData, TValue>({
     },
   });
 
-  const [hydrated, setHydrated] = useState(false);
-  const router = useRouter();
-  useEffect(() => {
-    setHydrated(true);
-    // table.setPageSize(2);
-    router.refresh();
-  }, []);
-  if (!hydrated) {
-    return (
-      <div className="flex items-center justify-center h-32">
-        <p className="text-gray-500 text-lg">Loading...</p>
-      </div>
-    );
-  }
+  // const [hydrated, setHydrated] = useState(false);
+  // const router = useRouter();
+  // useEffect(() => {
+  //   setHydrated(true);
+  //   // table.setPageSize(2);
+  //   router.refresh();
+  // }, []);
+  // if (!hydrated) {
+  //   return (
+  //     <div className="flex items-center justify-center h-32">
+  //       <p className="text-gray-500 text-lg">Loading...</p>
+  //     </div>
+  //   );
+  // }
 
   return (
     <div className="bg-white rounded-md shadow-md p-4">

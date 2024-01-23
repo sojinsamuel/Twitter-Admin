@@ -29,7 +29,7 @@ import {
   Copy,
   Link as LinkICON,
 } from "lucide-react";
-import { deleteRecord, toggleActivity, updateKeywords } from "./action";
+import { deleteRecord, updateKeywords, manageCron } from "./action";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
@@ -41,9 +41,7 @@ export type Account = {
   user_id: string;
   activity: string;
   keyword: string;
-  // email: string;
-  // image: string;
-  // lastSeen: string;
+  State: string;
 };
 
 export const columns: ColumnDef<Account>[] = [
@@ -169,8 +167,8 @@ export const columns: ColumnDef<Account>[] = [
     id: "actions",
     cell: function Cell({ row }) {
       const account = row.original;
-      const router = useRouter();
-
+      // const router = useRouter();
+      const state = account.State;
       return (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -187,25 +185,26 @@ export const columns: ColumnDef<Account>[] = [
             <DropdownMenuItem
               onClick={() => navigator.clipboard.writeText(account.user_id)}
             >
-              Copy User ID
+              <Copy className="h-4 w-4 mr-1" />
+              Copy user id
             </DropdownMenuItem>
             {/* <DropdownMenuSeparator /> */}
 
             <DropdownMenuItem
               className=""
               onClick={async () => {
-                await toggleActivity(
+                await manageCron(
                   account.screen_name,
-                  account.active ? false : true
+                  state === "ENABLED" ? "DISABLED" : "ENABLED"
                 );
               }}
             >
-              {account.active ? "Deactivate" : "Activate"}
+              {state === "ENABLED" ? "Deactivate" : "Activate"}
             </DropdownMenuItem>
             <DropdownMenuItem
               onClick={async () => {
                 await deleteRecord(account.screen_name);
-                router.refresh();
+                // router.refresh();
               }}
             >
               Delete

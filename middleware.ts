@@ -27,7 +27,7 @@ export async function middleware(req: NextRequest) {
     // if (data.message === "Failed Token") {
     //   throw new Error("Failed Token");
     // }
-    return NextResponse.redirect(new URL("/accounts", req.url));
+    return NextResponse.redirect(new URL("/waiting", req.url));
   } catch {
     return NextResponse.redirect(new URL("/", req.url));
   }
