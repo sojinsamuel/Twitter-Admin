@@ -3,8 +3,9 @@
 import { Loader2, PlusIcon } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
-
+import { unstable_noStore as noStore } from "next/cache";
 export function AddAccount() {
+  noStore();
   const [oauthURL, setOauthURL] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
