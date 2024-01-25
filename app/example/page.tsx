@@ -16,7 +16,7 @@ export default function Page() {
   // You can add any UI inside Loading, including a Skeleton.
   return (
     <section className="py-24 ">
-      <div className="container">
+      <div className="containers">
         <h1 className="text-4xl font-bold mb-8 text-gray-800">All Accounts</h1>
         {/* <div className="bg-white rounded-md shadow-md p-4"> */}
         {/* <div className="flex items-center justify-between mb-10">
