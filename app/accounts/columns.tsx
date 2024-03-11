@@ -21,7 +21,8 @@ import {
 } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-
+import { Toggle } from "@/components/ui/toggle";
+import { Power } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 import {
   MoreHorizontal,
@@ -29,8 +30,8 @@ import {
   Copy,
   Link as LinkICON,
 } from "lucide-react";
-import { deleteRecord, updateKeywords, manageCron } from "./action";
-import { useState } from "react";
+import { deleteRecord, updateKeywords, manageCron, toggleMode } from "./action";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -42,9 +43,40 @@ export type Account = {
   activity: string;
   keyword: string;
   State: string;
+  undressai_mode: boolean;
 };
 
 export const columns: ColumnDef<Account>[] = [
+  {
+    accessorKey: "undressai_mode",
+    header: "Undressai Mode",
+    cell: function Cell({ row }) {
+      const [isPressed, setIsPressed] = useState(false);
+      const handleToggleChange = () => {
+        setIsPressed((prev) => !prev);
+        const res = toggleMode(
+          row.original.screen_name,
+          row.original.undressai_mode === true ? false : true
+        );
+        console.log(res);
+      };
+      return (
+        <Toggle
+          size="lg"
+          aria-label="Toggle bold "
+          pressed={isPressed}
+          onPressedChange={handleToggleChange}
+        >
+          {/* {JSON.stringify(row.original.undressai_mode)} */}
+          <Power
+            className="text-center"
+            color={`${row.original.undressai_mode ? "green" : "red"}`}
+            // size={24}
+          />
+        </Toggle>
+      );
+    },
+  },
   {
     accessorKey: "screen_name",
     header: ({ column }) => {
@@ -146,7 +178,7 @@ export const columns: ColumnDef<Account>[] = [
                     // defaultValue="Onlyfans"
                     className="col-span-3"
                     onChange={(e) => setKeyword(e.target.value)}
-                    placeholder="eg: onlyfans"
+                    placeholder="eg: memes"
                     value={keyword}
                   />
                 </div>

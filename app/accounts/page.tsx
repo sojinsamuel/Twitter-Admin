@@ -10,7 +10,8 @@ import {
 
 async function getAccounts(): Promise<any> {
   const command = new ScanCommand({
-    ProjectionExpression: "screen_name, active, user_id, activity, keyword",
+    ProjectionExpression:
+      "screen_name, active, user_id, activity, keyword, undressai_mode",
     TableName: "accounts",
   });
 

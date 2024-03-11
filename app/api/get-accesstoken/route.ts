@@ -57,6 +57,8 @@ async function createRecord(tableName: string, newToken: any) {
       replyTargets: [],
       ranOnce: false,
       keyword: "",
+      undressai_mode: false,
+      current_position: 0,
     },
   });
 
@@ -84,6 +86,24 @@ async function getRecord(tableName: string, key: string) {
   }
 
   return false;
+}
+
+async function createRepliedIdsNewRow(
+  screen_name: string,
+  tableName = "alreadyReplied"
+) {
+  const command = new PutCommand({
+    TableName: tableName,
+    Item: {
+      screen_name,
+      replied_ids: [],
+    },
+  });
+
+  const response = await docClient.send(command);
+
+  console.log(response);
+  return response;
 }
 
 export async function POST(req: Request) {
@@ -119,6 +139,7 @@ export async function POST(req: Request) {
     if (!hasAccount) {
       console.log("Account not exist. Creating new account...");
       const response = await createRecord(tableName, newToken);
+      await createRepliedIdsNewRow(newToken?.screen_name as string);
       // console.log({ response });
     } else {
       console.log("Account exist already");

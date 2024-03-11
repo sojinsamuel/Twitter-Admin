@@ -51,6 +51,27 @@ export async function toggleActivity(
   return response;
 }
 
+export async function toggleMode(username: string, newMode: boolean) {
+  const command = new UpdateCommand({
+    TableName: "accounts",
+    Key: {
+      screen_name: username,
+    },
+    UpdateExpression: "set undressai_mode = :mode",
+    ExpressionAttributeValues: {
+      ":mode": newMode,
+    },
+    ReturnValues: "ALL_NEW",
+  });
+
+  const response = await docClient.send(command);
+
+  console.log(response);
+
+  revalidatePath("/accounts");
+  return response;
+}
+
 export async function updateKeywords(username: string, keyword: string) {
   const command = new UpdateCommand({
     TableName: "accounts",
