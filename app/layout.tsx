@@ -7,7 +7,7 @@ import { Sidebar } from "@/components/side-bar";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Mini Twitter bot dashboard",
+  title: "Twitter bot dashboard",
   description: "Control your twitter bot from here.",
 };
 
