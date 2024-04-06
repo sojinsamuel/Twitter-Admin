@@ -12,8 +12,8 @@ import {
 const cloudWatchClient = new CloudWatchEventsClient({
   region: "us-east-1",
   credentials: {
-    accessKeyId: process.env.AWS_ACCESS_KEY_ID!,
-    secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY!,
+    accessKeyId: process.env.CLOUD_SERVER_ACCESS_KEY_ID!,
+    secretAccessKey: process.env.CLOUD_SERVER_SECRET_ACCESS_KEY!,
   },
 });
 
