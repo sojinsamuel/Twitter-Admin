@@ -25,11 +25,14 @@ export function Sidebar() {
         <Sheet key={side}>
           <SheetTrigger asChild>
             {/* <Button variant="outline">{side}</Button> */}
-            <SidebarClose
+            {/* <SidebarClose
               height={30}
               width={30}
               className="cursor-pointer ml-10 mt-10"
-            />
+            /> */}
+            <Button variant="blue" className="relative top-14 left-11">
+              Menu
+            </Button>
           </SheetTrigger>
           <SheetContent side={side} className="text-center ">
             <SheetHeader>
