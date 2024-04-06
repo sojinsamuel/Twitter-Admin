@@ -13,7 +13,6 @@ import {
 } from "@/aws/cloudwatch/CloudWatchClient";
 
 import { revalidatePath } from "next/cache";
-import exp from "constants";
 
 export async function deleteRecord(username: string) {
   const command = new DeleteCommand({
