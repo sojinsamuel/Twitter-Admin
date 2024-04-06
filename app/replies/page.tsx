@@ -32,7 +32,7 @@ export default async function Replies() {
       <div className="mx-auto w-full max-w-7xl px-5 py-16 md:px-10 md:py-24 lg:py-32 bg-gradient-to-br from-[#0f0f0f] to-[#222222]">
         {result.map((account: any, index: any) => {
           return (
-            <>
+            <div key={account}>
               <div className="text-center ">
                 <h2
                   className={`text-white text-3xl font-semibold md:text-5xl  ${
@@ -60,7 +60,7 @@ export default async function Replies() {
                   );
                 })}
               </div>
-            </>
+            </div>
           );
         })}
       </div>
