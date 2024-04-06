@@ -7,7 +7,6 @@ import {
   ListRulesCommand,
   cloudWatchClient,
 } from "@/aws/cloudwatch/CloudWatchClient";
-import { Sidebar } from "@/components/side-bar";
 
 async function getAccounts(): Promise<any> {
   const command = new ScanCommand({
@@ -39,19 +38,19 @@ async function mergeAccountsAndRules(accs: any, rules: any) {
     const ruleName = `${screen_name}ScheduleRule`;
     const matchRuleFound = rules.find((rule: any) => rule.Name === ruleName);
     if (!matchRuleFound) {
-      // console.log(`Rule ${ruleName} not found`);
+      console.log(`Rule ${ruleName} not found`);
       continue;
     }
     mergeData.push({ ...acc, ...matchRuleFound });
   }
-  // console.log(mergeData);
+  console.log(mergeData);
   return mergeData;
 }
 
 async function Page() {
   const accounts = await getAccounts();
   const rules = await listAllRules();
-  // console.log(accounts);
+  console.log(accounts);
   const combinedRes = await mergeAccountsAndRules(accounts, rules);
   console.log(combinedRes);
   revalidatePath("/accounts");
