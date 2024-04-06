@@ -22,7 +22,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Toggle } from "@/components/ui/toggle";
-import { Power } from "lucide-react";
+import { Power, HeartIcon } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
 import {
   MoreHorizontal,
@@ -30,10 +30,18 @@ import {
   Copy,
   Link as LinkICON,
 } from "lucide-react";
-import { deleteRecord, updateKeywords, manageCron, toggleMode } from "./action";
+import {
+  deleteRecord,
+  updateKeywords,
+  manageCron,
+  toggleMode,
+  updateConfig,
+  toggleLikeAndRetweetMode,
+} from "./action";
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { Textarea } from "@/components/ui/textarea";
 
 export type Account = {
   method: string;
@@ -44,6 +52,8 @@ export type Account = {
   keyword: string;
   State: string;
   undressai_mode: boolean;
+  configuration: string;
+  like_and_retweet: boolean;
 };
 
 export const columns: ColumnDef<Account>[] = [
@@ -71,6 +81,36 @@ export const columns: ColumnDef<Account>[] = [
           <Power
             className="text-center"
             color={`${row.original.undressai_mode ? "green" : "red"}`}
+            // size={24}
+          />
+        </Toggle>
+      );
+    },
+  },
+  {
+    accessorKey: "like_and_retweet",
+    header: "Like & Retweet",
+    cell: function Cell({ row }) {
+      const [isPressed, setIsPressed] = useState(false);
+      const handleToggleChange = () => {
+        setIsPressed((prev) => !prev);
+        const res = toggleLikeAndRetweetMode(
+          row.original.screen_name,
+          row.original.like_and_retweet === true ? false : true
+        );
+        console.log(res);
+      };
+      return (
+        <Toggle
+          size="lg"
+          aria-label="Toggle bold "
+          pressed={isPressed}
+          onPressedChange={handleToggleChange}
+        >
+          {/* {JSON.stringify(row.original.undressai_mode)} */}
+          <HeartIcon
+            className="text-center"
+            color={`${row.original.like_and_retweet ? "green" : "red"}`}
             // size={24}
           />
         </Toggle>
@@ -185,6 +225,65 @@ export const columns: ColumnDef<Account>[] = [
               </div>
               <DialogFooter>
                 <Button onClick={handleSaveKeyword} type="submit">
+                  Save changes
+                </Button>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </>
+      );
+    },
+  },
+  {
+    accessorKey: "configuration",
+    header: "Configuration",
+    cell: function Cell({ row }) {
+      const account = row.original;
+      const [addConfig, setAddConfig] = useState(false);
+      const [config, setConfig] = useState(account?.configuration || "");
+
+      const handleSaveConfig = async () => {
+        if (config.trim() === "") return;
+        // console.log(keyword, "Keyword saved for", account.screen_name);
+        await updateConfig(account.screen_name, config);
+        setAddConfig(false);
+      };
+
+      return (
+        <>
+          <Button
+            variant="black"
+            className=""
+            onClick={() => setAddConfig(true)}
+          >
+            Update Config
+          </Button>
+          <Dialog open={addConfig} onOpenChange={setAddConfig}>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>
+                  Target config for{" "}
+                  <span className="text-blue-500">@{account.screen_name}</span>
+                </DialogTitle>
+                {/* <DialogDescription>
+                  Only one keyword is allowed per account 
+                </DialogDescription> */}
+              </DialogHeader>
+              <div className="grid gap-4 py-4 ">
+                <div className="grid grid-cols-4 items-center gap-4 ">
+                  {/* <Label htmlFor="username" className="text-right">
+                    Configuration
+                  </Label> */}
+                  <Textarea
+                    className="w-[360px] h-[120px]"
+                    placeholder="Type your message or rules here in bullet points."
+                    onChange={(e) => setConfig(e.target.value)}
+                    value={config}
+                  />
+                </div>
+              </div>
+              <DialogFooter>
+                <Button onClick={handleSaveConfig} type="submit">
                   Save changes
                 </Button>
               </DialogFooter>

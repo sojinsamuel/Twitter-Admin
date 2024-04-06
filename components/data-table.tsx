@@ -38,6 +38,7 @@ import {
 import { AddAccount } from "./add-account";
 import { DataTableSkeleton } from "./skeletons/table-skeleton";
 import { useRouter } from "next/navigation";
+import { useAppContext } from "@/context";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -69,6 +70,8 @@ export function DataTable<TData, TValue>({
     },
   });
 
+  // const { name, setName } = useAppContext() as any;
+  // setName(data);
   // const [hydrated, setHydrated] = useState(false);
   // const router = useRouter();
   // useEffect(() => {

@@ -13,6 +13,7 @@ import {
 } from "@/aws/cloudwatch/CloudWatchClient";
 
 import { revalidatePath } from "next/cache";
+import exp from "constants";
 
 export async function deleteRecord(username: string) {
   const command = new DeleteCommand({
@@ -72,6 +73,30 @@ export async function toggleMode(username: string, newMode: boolean) {
   return response;
 }
 
+export async function toggleLikeAndRetweetMode(
+  username: string,
+  newMode: boolean
+) {
+  const command = new UpdateCommand({
+    TableName: "accounts",
+    Key: {
+      screen_name: username,
+    },
+    UpdateExpression: "set like_and_retweet = :mode",
+    ExpressionAttributeValues: {
+      ":mode": newMode,
+    },
+    ReturnValues: "ALL_NEW",
+  });
+
+  const response = await docClient.send(command);
+
+  console.log(response);
+
+  revalidatePath("/accounts");
+  return response;
+}
+
 export async function updateKeywords(username: string, keyword: string) {
   const command = new UpdateCommand({
     TableName: "accounts",
@@ -81,6 +106,25 @@ export async function updateKeywords(username: string, keyword: string) {
     UpdateExpression: "set keyword = :keyword",
     ExpressionAttributeValues: {
       ":keyword": keyword,
+    },
+    ReturnValues: "ALL_NEW",
+  });
+
+  const response = await docClient.send(command);
+  console.log(response);
+  revalidatePath("/accounts");
+  return response;
+}
+
+export async function updateConfig(username: string, config: string) {
+  const command = new UpdateCommand({
+    TableName: "accounts",
+    Key: {
+      screen_name: username,
+    },
+    UpdateExpression: "set configuration = :config",
+    ExpressionAttributeValues: {
+      ":config": config,
     },
     ReturnValues: "ALL_NEW",
   });

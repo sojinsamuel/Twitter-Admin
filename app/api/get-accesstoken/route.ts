@@ -58,7 +58,14 @@ async function createRecord(tableName: string, newToken: any) {
       ranOnce: false,
       keyword: "",
       undressai_mode: false,
+      like_and_retweet: false,
       current_position: 0,
+      configuration: "1) First point goes here",
+      stats: {
+        today: 0,
+        yesterday: 0,
+        totalValue: 0,
+      },
     },
   });
 

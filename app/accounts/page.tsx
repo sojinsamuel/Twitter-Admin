@@ -7,11 +7,12 @@ import {
   ListRulesCommand,
   cloudWatchClient,
 } from "@/aws/cloudwatch/CloudWatchClient";
+import { Sidebar } from "@/components/side-bar";
 
 async function getAccounts(): Promise<any> {
   const command = new ScanCommand({
     ProjectionExpression:
-      "screen_name, active, user_id, activity, keyword, undressai_mode",
+      "screen_name, active, user_id, activity, keyword, undressai_mode, configuration, replyTargets, like_and_retweet",
     TableName: "accounts",
   });
 
@@ -38,7 +39,7 @@ async function mergeAccountsAndRules(accs: any, rules: any) {
     const ruleName = `${screen_name}ScheduleRule`;
     const matchRuleFound = rules.find((rule: any) => rule.Name === ruleName);
     if (!matchRuleFound) {
-      console.log(`Rule ${ruleName} not found`);
+      // console.log(`Rule ${ruleName} not found`);
       continue;
     }
     mergeData.push({ ...acc, ...matchRuleFound });
@@ -52,7 +53,7 @@ async function Page() {
   const rules = await listAllRules();
   // console.log(accounts);
   const combinedRes = await mergeAccountsAndRules(accounts, rules);
-  // console.log(combinedRes);
+  console.log(combinedRes);
   revalidatePath("/accounts");
   return (
     <section className="py-24 bg-gray-100">
