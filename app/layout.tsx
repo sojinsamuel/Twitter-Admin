@@ -8,7 +8,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Twitter bot dashboard",
-  description: "Control your Twitter bot from here.",
+  description: "Control your Twitter bot from here",
 };
 
 export default function RootLayout({
