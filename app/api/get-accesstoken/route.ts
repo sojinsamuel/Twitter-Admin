@@ -56,7 +56,7 @@ async function createRecord(tableName: string, newToken: any) {
       activity: "Alive",
       replyTargets: [],
       ranOnce: false,
-      keyword: "",
+      keyword: "javascript",
       undressai_mode: false,
       like_and_retweet: false,
       current_position: 0,

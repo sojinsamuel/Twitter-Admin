@@ -19,7 +19,7 @@ export default function RootLayout({
   return (
     <html suppressHydrationWarning lang="en">
       <body className={inter.className}>
-        <Sidebar />
+        {/* <Sidebar /> */}
         <AppProvider>{children}</AppProvider>
       </body>
     </html>

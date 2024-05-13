@@ -57,66 +57,66 @@ export type Account = {
 };
 
 export const columns: ColumnDef<Account>[] = [
-  {
-    accessorKey: "undressai_mode",
-    header: "Undressai Mode",
-    cell: function Cell({ row }) {
-      const [isPressed, setIsPressed] = useState(false);
-      const handleToggleChange = () => {
-        setIsPressed((prev) => !prev);
-        const res = toggleMode(
-          row.original.screen_name,
-          row.original.undressai_mode === true ? false : true
-        );
-        console.log(res);
-      };
-      return (
-        <Toggle
-          size="lg"
-          aria-label="Toggle bold "
-          pressed={isPressed}
-          onPressedChange={handleToggleChange}
-        >
-          {/* {JSON.stringify(row.original.undressai_mode)} */}
-          <Power
-            className="text-center"
-            color={`${row.original.undressai_mode ? "green" : "red"}`}
-            // size={24}
-          />
-        </Toggle>
-      );
-    },
-  },
-  {
-    accessorKey: "like_and_retweet",
-    header: "Like & Retweet",
-    cell: function Cell({ row }) {
-      const [isPressed, setIsPressed] = useState(false);
-      const handleToggleChange = () => {
-        setIsPressed((prev) => !prev);
-        const res = toggleLikeAndRetweetMode(
-          row.original.screen_name,
-          row.original.like_and_retweet === true ? false : true
-        );
-        console.log(res);
-      };
-      return (
-        <Toggle
-          size="lg"
-          aria-label="Toggle bold "
-          pressed={isPressed}
-          onPressedChange={handleToggleChange}
-        >
-          {/* {JSON.stringify(row.original.undressai_mode)} */}
-          <HeartIcon
-            className="text-center"
-            color={`${row.original.like_and_retweet ? "green" : "red"}`}
-            // size={24}
-          />
-        </Toggle>
-      );
-    },
-  },
+  // {
+  //   accessorKey: "undressai_mode",
+  //   header: "Undressai Mode",
+  //   cell: function Cell({ row }) {
+  //     const [isPressed, setIsPressed] = useState(false);
+  //     const handleToggleChange = () => {
+  //       setIsPressed((prev) => !prev);
+  //       const res = toggleMode(
+  //         row.original.screen_name,
+  //         row.original.undressai_mode === true ? false : true
+  //       );
+  //       console.log(res);
+  //     };
+  //     return (
+  //       <Toggle
+  //         size="lg"
+  //         aria-label="Toggle bold "
+  //         pressed={isPressed}
+  //         onPressedChange={handleToggleChange}
+  //       >
+  //         {/* {JSON.stringify(row.original.undressai_mode)} */}
+  //         <Power
+  //           className="text-center"
+  //           color={`${row.original.undressai_mode ? "green" : "red"}`}
+  //           // size={24}
+  //         />
+  //       </Toggle>
+  //     );
+  //   },
+  // },
+  // {
+  //   accessorKey: "like_and_retweet",
+  //   header: "Like & Retweet",
+  //   cell: function Cell({ row }) {
+  //     const [isPressed, setIsPressed] = useState(false);
+  //     const handleToggleChange = () => {
+  //       setIsPressed((prev) => !prev);
+  //       const res = toggleLikeAndRetweetMode(
+  //         row.original.screen_name,
+  //         row.original.like_and_retweet === true ? false : true
+  //       );
+  //       console.log(res);
+  //     };
+  //     return (
+  //       <Toggle
+  //         size="lg"
+  //         aria-label="Toggle bold "
+  //         pressed={isPressed}
+  //         onPressedChange={handleToggleChange}
+  //       >
+  //         {/* {JSON.stringify(row.original.undressai_mode)} */}
+  //         <HeartIcon
+  //           className="text-center"
+  //           color={`${row.original.like_and_retweet ? "green" : "red"}`}
+  //           // size={24}
+  //         />
+  //       </Toggle>
+  //     );
+  //   },
+  // },
   {
     accessorKey: "screen_name",
     header: ({ column }) => {
